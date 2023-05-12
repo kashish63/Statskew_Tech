@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}
+Contact |
+{% endblock title %}
+{% block body %}
+<!-- <div class="mt-5" style="width: 1366px; height: 460px; border: 2px solid red;"></div> -->
+<div class="mt-5  .img-fluid" >
+  {% comment %} style="background: url('../static/contact.jpg'); background-size: cover;" {% endcomment %}
+  <div class=" p-5 " > 
+    <h2 class="text-center">Contact Us</h2>
+    <p class="fw-semibold text-center">Contact Us for any query in your mind about any Internship and any other query in your mind. We can solve your queries as soon as possible. You can also contact us at the mention details and by social media accounts given on the footer</p>
+    <div style="display: flex;">
+    <div class=" text-start" style="padding-left: 80px;">
+      <div class="text d-flex">
+        <span class="justify-content-center d-flex align-items-center"
+        style="width: 50px; height: 50px; background: #007E33; border-radius: 50%; font-size: 30px;"><i class="fa-solid fa-location-dot" ></i></span>
+       <div class="fs-3 fw-semibold px-1">Address</div>
+      </div>
+      <p class="fw-semibold" style="margin-left: 3rem;">104A  Krishna Bihar<br> Agra Road, Aligrh <br>202001</p>
+      <!-- <div class="icon"></div>
+      <div class="text">
+        <h4><i class="fa-solid fa-location-dot" ></i> Address</h4>
+        <p>104A  Krishna Bihar<br> Agra Road, Aligrh <br>202001</p>
+      </div> -->
+      <div class="text d-flex">
+        <span class="justify-content-center d-flex align-items-center"
+        style="width: 50px; height: 50px; background: #007E33; border-radius: 50%; font-size: 30px;"><i class="fa-solid fa-envelope" ></i></span>
+       <div class="fs-3 fw-semibold px-1">Phone </div>
+      </div>
+      <p class="fw-semibold">+91-8439985104</p>
+        <div class="text d-flex">
+          <span class="justify-content-center d-flex align-items-center"
+          style="width: 50px; height: 50px; background: #007E33; border-radius: 50%; font-size: 30px;"><i class="fa-solid fa-envelope" ></i></span>
+         <div class="fs-3 fw-semibold px-1">Email </div>
+        </div>
+        <p class="fw-semibold">chitranshsaxena82@gmail.com</p>
+    </div>
+    <div class="bg-white text-dark p-3" style=" height: 360px; width: 450px; margin-left:350px ; border-radius: 12px;">
+      <form method='POST' action='/contact' class="fw-semibold">
+        {% csrf_token %}
+        {% if error%}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endif %}
+        <h4>Send Message</h4>
+        <div class="">
+          <label for="name" class="form-label  ">Full Name</label>
+          <input type="text" class="form-control"  id="name" value ="{{values.name}}" name="name">
+        </div>
+        <div class="">
+          <label for="email" class="form-label ">Email</label>
+          <input type="email" class="form-control"  id="email" value ="{{values.email}}" name="email">
+        </div>
+        
+        <div class="">
+          <label for="content" class="form-label ">Type Your Message...<br></label>
+          <div class="form-outline">
+            <textarea class="form-control" id="content" value ="{{values.content}}" name = "content" rows="3"></textarea>
+            
+          </div>
+        </div>
+       
+        <button type="submit" class="btn btn-primary mt-2">Submit</button><br><br>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- <section class="container-fluid my-5">
+  <div class="content ">
+    <h2>Contact Us</h2>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae sunt atque excepturi iusto fugiat. Tempore sunt nesciunt atque vel cumque? Ipsum, vero asperiores. Esse molestiae in error dignissimos obcaecati voluptates, maiores temporibus hic officia modi dolores, consectetur, quas enim ut!</p>
+  </div>
+  <div class="containr">
+    <div class="contactinfo">
+      <div class="box">
+        <div class="icon"></div>
+        <div class="text">
+          <h3><i class="fa-solid fa-location-dot" style="color: #007E33;"></i> Address</h3>
+          <p>104A  Krishna Bihar<br> Agra Road, Aligrh <br>202001</p>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="icon"></div>
+      <div class="text">
+        <h3><i class="fa-solid fa-phone" style="color: #007E33;"></i> Phone</h3>
+        <p>+91-8439985104</p>
+      </div>
+    </div>
+  </div>
+      <div class="box">
+        <div class="icon"></div>
+        <div class="text">
+          <h3><i class="fa-solid fa-envelope" style="color: #007E33;"></i> Email</h3>
+          <p>chitranshsaxena82@gmail.com</p>
+        </div>
+      </div>
+    </div>
+      <div class="contactform">
+        <form action="">
+          <h2>Send Message</h2>
+          <div class="inputbox">
+            <input type="text" name="" required="required">
+            <span>Full Name</span>
+          </div>
+          <div class="inputbox">
+            <input type="text" name="" required="required">
+            <span>Email</span>
+          </div>
+          <div class="inputbox">
+            <textarea name="" id="" cols="30" rows="10" required="required"></textarea>
+            <span>Type Your Message...</span>
+          </div>
+          <div class="btn btn-primary">Submit</div>
+        </form>
+      </div>
+  </div>
+</section> -->
+
+{% endblock body %}

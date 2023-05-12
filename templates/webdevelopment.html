@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}
+Web Development Internship |
+{% endblock title %}
+{% block body %}
+<div class="p-5 mt-5 bg-success"  >
+    <h1 class="fw-bolder">Web Development Internship</h1>
+    <p class="fw-semibold">In this Internship Intern writing well designed, testable, efficient code by using best software development practices. Creating website layout/user interfaces by using standard HTML/CSS practices. Integrating data from various back-end services and databases. Update and edit website content, posts and pages.</p>
+    <p class="fw-semibold" style="font-size:20px;"><i class="fa-sharp fa-solid fa-calendar-days"></i> Duration: 4 Months</p>
+</div>
+<!-- <h2 class="container fw-bold mt-5 mb-3"><i class="fa-solid fa-circle-check " style="color: #007E33;"></i> Get in touch for Consultation Or Internship program.</h2> -->
+<h2 class="container fw-bold mt-5 mb-3 "><i class="fa-solid fa-circle-check " style="color: #007E33;"></i> Enroll Web Development Internship</h2>
+
+<div class="container p-5 bg-success mb-3 d-flex justify-content-between" >
+    <!-- <h2 class="fw-bold text-decoration-underline">Enroll Data Science Internship<br><br></h2> -->
+<form method='POST' action='/WebDevelopment' class="col-6 fw-bold">
+  {% csrf_token %}
+  {% if error%}
+  <div class="alert alert-danger" role="alert">
+      {{error}}
+  </div>
+  {% endif %}
+    <div class="mb-3 ">
+      <label for="firstname" class="form-label fs-5 ">First Name</label>
+      <input type="text" class="form-control" id="firstname" value ="{{values.first_name}}" name="firstname">
+    </div>
+    <div class="mb-3">
+      <label for="lastname" class="form-label fs-5 ">Last Name</label>
+      <input type="text" class="form-control" id="lastname" value ="{{values.last_name}}" name="lastname">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label fs-5 ">Email</label>
+      <input type="email" class="form-control" value ="{{values.email}}" id="email" name="email">
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label fs-5 ">Phone Number</label>
+      <input type="phone" class="form-control" id="phone" value ="{{values.phone}}" name="phone">
+    </div>
+    <div class="mb-3">
+      <label for="dob" class="form-label fs-5 ">Date of Birth</label>
+      <input type="date" class="form-control" id="dob" value ="{{values.dob}}" name="dob">
+    </div>
+    <div class="mb-3">
+      <label for="gender" class="form-label fs-5 ">Gender</label>
+      <input type="text" class="form-control" id="gender" value ="{{values.gender}}" name="gender">
+    </div>
+      <br>
+    
+    <button type="submit" class="btn btn-primary">Submit</button><br><br>
+  </form>
+<div><img src="../static/web.jpg" alt="" style="height: 600px; width: 500px;"></div>
+</div>
+
+{% endblock body %}

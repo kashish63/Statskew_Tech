@@ -1,0 +1,11 @@
+distlib
+filelock
+importlib-metadata
+importlib-resources
+numpy
+platformdirs
+typing_extensions
+virtualenv
+virtualenvwrapper-win
+zipp
+gunicorn

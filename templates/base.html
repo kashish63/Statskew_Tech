@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock title %} StatSkew Tech!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body class="bg-success" style="--bs-bg-opacity: .2;">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark " >
+    <div class="container-fluid ">
+      <a class="navbar-brand fw-semibold"  href="/home">
+        <img src="../static/StatSkew Tech!.jpg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-2" >
+        StatSkew Tech!
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active "  aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Internships
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark ">
+              <li><a class="dropdown-item" href="/WebDevelopment">Web Development</a></li>
+              <li><a class="dropdown-item" href="/Python">Python</a></li>
+              <li><a class="dropdown-item" href="/DataScience">Data Science</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/contact">Contact</a>
+          </li>
+        </ul>
+        </ul>
+        {% if user.is_authenticated %}<div class="text-white fw-semibold" style="display: flex;" ><div class="pt-2">Welcome {{request.user}}</div>
+          <div><a class="btn btn-outline-success mx-3 " href="/logout">LogOut</a></div>
+          <div><a class="btn btn-outline-success " href="/admin" target="_blank">Admin</a></div>
+        </div>
+        {% else %}
+        <div class="mx-2 d-flex">
+          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+          <button class="btn btn-outline-success mx-3" data-bs-toggle="modal" data-bs-target="#signupModal">SignUp</button>
+          <div><a class="btn btn-outline-success " href="/admin" target="_blank">Admin</a></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+
+  <!--for elert message-->
+  {% for message in messages %}
+  <div   style="margin-top: 58px; "  >
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  </div>
+  {% endfor %}
+
+  <!-- Login Modal -->
+  <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" >
+    <div class="modal-dialog ">
+      <div class="modal-content fw-bold" style="background-color: rgb(223, 238, 232);" >
+        <div class="modal-header">
+          <h1 class="modal-title fw-bold fs-5" id="loginModalLabel">LogIn to StatSkew Tech!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <hr class="border border-primary border-1 opacity-100">
+        <div class="modal-body">
+          <form method='POST' action='/login'>
+            {% csrf_token %} 
+            <div class="mb-3">
+              <label for="loginname" class="form-label">Username</label>
+              <input type="text" class="form-control" id="loginname" name="loginname" aria-describedby="emailHelp">
+              {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
+            </div>
+            <div class="mb-3">
+              <label for="loginpass" class="form-label">Password</label>
+              <input type="password" class="form-control" id="loginpass" name="loginpass">
+            </div>
+            <!-- <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </form>
+        </div>
+        <hr class="border border-primary border-1 opacity-100">
+        <div class="modal-footer">
+          <span>Don't have Account</span>
+          <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#signupModal">SignUp</button>
+          <button type="button" class="btn btn-secondary mx-3" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SignUp Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content fw-bold" style="background-color: rgb(223, 238, 232);" >
+        <div class="modal-header">
+          <h1 class="modal-title fw-bold fs-5" id="signupModalLabel">Sign Up to StatSkew Tech!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- <hr class="border border-primary border-1"> -->
+        <div class="modal-body">
+          <form method='POST' action='/signup'>
+            {% csrf_token %} 
+            <div class="mb-3">
+              <label for="formGroupName" class="form-label">Enter your Name</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" name="name">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword5" class="form-label">Password</label>
+              <input type="password" id="inputPassword5" class="form-control" name="passw" aria-describedby="passwordHelpBlock">
+              <div id="passwordHelpBlock" class="form-text">
+                Your password must be 8-20 characters long.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="cexampleInputPassword1" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" name="cpass" id="cexampleInputPassword1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </form>
+        </div>
+        <!-- <hr class="border border-primary border-1"> -->
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block body %}{% endblock body %}
+  <!-- FOOTER -->
+  <footer class="container-fluid bg-success py-1 px-2">
+    <div class="d-flex my-3">
+    <a  href="https://www.instagram.com/statskewtechs/" target="_blank"> <h3><i class="fa-brands fa-instagram  mx-5" style="color: black;"></i></h3></a>
+    <a  href="https://www.instagram.com/statskewtechs/" target="_blank"> <h3><i class="fa-brands fa-square-facebook " style="color: black;"></i></h3></a>
+    <a  href="https://www.instagram.com/statskewtechs/" target="_blank"> <h3><i class="fa-brands fa-linkedin mx-5" style="color: black;"></i></h3></a>
+  </div>
+    <!-- <h3><i class="fa-brands fa-instagram my-3 mx-5" ></i>
+       <i class="fa-brands fa-square-facebook"></i>
+       <i class="fa-brands fa-linkedin mx-5"></i></h3> -->
+
+    <p class="float-end "><a class="text-white" href="#">Back to top</a></p>
+    <p>&copy; 2017–2022 Company, Inc. &middot; <a class="text-white" href="#">Privacy</a> &middot; <a class="text-white" href="#">Terms</a></p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95f3caed22.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
